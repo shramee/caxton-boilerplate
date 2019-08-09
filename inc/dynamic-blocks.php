@@ -33,17 +33,18 @@ class Caxton_Boilerplate_Dynamic_Blocks {
 	public function register_blocks() {
 		register_block_type(
 			'caxton-boilerplate/demo',
-			[ 'render_callback' => [ $this, 'demo' ] ]
+			[ 'render_callback' => [ $this, 'render_demo' ] ]
 		);
 	}
 
 	public function rest_handler_demo() {
+		//Make sure you convert all spaces ` ` to underscores when using/passing props to block renderer
 		$args = $_GET;
 		unset( $args['_locale'] );
 		return $this->demo( $args );
 	}
 
-	public function demo( $args ) {
+	public function render_demo( $args ) {
 		return 'Args below: <pre>' . print_r( $args, 1 ) . '</pre>';
 	}
 }
