@@ -92,4 +92,5 @@ class Caxton_Boilerplate {
 	}
 }
 
+require_once 'inc/dynamic-blocks.php';
 Caxton_Boilerplate::instance();

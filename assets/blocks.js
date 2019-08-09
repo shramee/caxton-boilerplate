@@ -3,28 +3,39 @@ CaxtonBlock( {
 	title   : 'Caxton boilerplate',
 	icon    : 'star-filled',
 	category: 'layout',
-	tpl: "<h2 style='color:{{Text color}};{{border}}' class='fw4 mv2'>{{Content}}</h2>",
-	fields: {
-
-		'Text color' : {
-			// Key is the ID for the field, replaces {{Text color}} in the template with value
-			// Key is used as label by default
-			type: 'color',
+	apiUrl  : function ( props ) {
+		// Generate the API URL here
+		var
+			attr = props.attributes;
+		return {
+			blockHTML: '/caxton-boilerplate/v1/demo?color=' + attr['color'],
+		};
+	},
+	fields  : {
+		'color': {
+			label  : 'Text color',
+			type   : 'color',
 			default: '#e91d63',
-			section: 'Layout',
-		},
-		'border' : { // Replaces {{border}} in the template with value
-			label: 'Border width', // Optional label different from id
-			type: 'range',
-			default: '#e91d63',
-			section: 'Layout',
-			tpl: 'border:%spx solid;', // %s is replaced with value in tpl which then replaces {{border}} in block tpl
-		},
-		'Content': {
-			type: 'editable', // Editable in tpl in editor/
-			default: 'Some content here',
 		},
 	},
+	apiCallback: function ( props, that ) {
+		if ( props.blockHTML && props.blockHTML.data ) {
+
+			return Caxton.html2el( props.blockHTML.data, {
+				className: 'woocommerce',
+				key      : 'block-html',
+				style    : {},
+				onClick  : function ( e ) {
+					e.preventDefault();
+				}
+			} );
+		} else {
+			return wp.element.createElement( 'div', {
+				className: 'caxton-notification',
+				key      : 'notice'
+			}, 'Loading demo block...' );
+		}
+	}
 } );
 
 
