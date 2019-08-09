@@ -1,19 +1,19 @@
 <?php
 /*
- * Plugin Name: Gutenberg blocks in 25 minutes
+ * Plugin Name: Caxton block boilerplate
  * Plugin URI: http://shramee.me/
- * Description: Quick blocks for Gutenberg with Caxton
+ * Description: Roll out quick blocks for Gutenberg with Caxton
  * Author: Shramee
  * Version: 1.0.0
  * Author URI: http://shramee.me/
  */
 
 /**
- * Class Gutenberg_Blocks_In_25_Minutes
+ * Class Caxton_Boilerplate
  * Enqueues scripts and styles for blocks.
  * Displays a notice to admin if Caxton is not installed.
  */
-class Gutenberg_Blocks_In_25_Minutes {
+class Caxton_Boilerplate {
 
 	/** @var self Instance */
 	private static $_instance;
@@ -31,7 +31,7 @@ class Gutenberg_Blocks_In_25_Minutes {
 	}
 
 	/**
-	 * Gutenberg_Blocks_In_25_Minutes constructor.
+	 * Caxton_Boilerplate constructor.
 	 */
 	protected function __construct() {
 		add_action( 'init', [ $this, 'init' ] );
@@ -58,8 +58,8 @@ class Gutenberg_Blocks_In_25_Minutes {
 	 */
 	public function editor_enqueue() {
 		$url = plugin_dir_url( __FILE__ );
-		wp_enqueue_style( "gbb25m-front", "$url/assets/styles.css" );
-		wp_enqueue_script( "gbb25m-admin", "$url/assets/blocks.js", array( 'caxton' ) );
+		wp_enqueue_style( "caxton-boilerplate-front", "$url/assets/styles.css" );
+		wp_enqueue_script( "caxton-boilerplate-admin", "$url/assets/blocks.js", array( 'caxton' ) );
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Gutenberg_Blocks_In_25_Minutes {
 	 */
 	public function enqueue() {
 		$url = plugin_dir_url( __FILE__ );
-		wp_enqueue_style( "gbb25m-front", "$url/assets/styles.css" );
+		wp_enqueue_style( "caxton-boilerplate-front", "$url/assets/styles.css" );
 	}
 
 	/**
@@ -78,23 +78,18 @@ class Gutenberg_Blocks_In_25_Minutes {
 	public function caxton_required_notice() {
 		echo
 			'<div class="notice is-dismissible error">' .
-			'<p>' .
-			sprintf(
-				__( '%s requires that you have our free plugin %s installed and activated.', 'gbb25m' ),
+
+			'<p>' . sprintf(
+				__( '%s requires that you have our free plugin %s installed and activated.', 'caxton-boilerplate' ),
 				'<b>Gutenberg blocks in 25 minutes</b>',
 				'<a href="' . admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '">Caxton</a>'
-			) .
-			'</p>' .
+			) . '</p>' .
 
-			'<p>' .
-
-			'<a  href="' . admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '" class="button-primary">' .
-			__( 'Install Caxton', 'gbb25m' ) . '</a>' .
-
-			'</p>' .
+			'<p><a  href="' . admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '" class="button-primary">' .
+			__( 'Install Caxton', 'caxton-boilerplate' ) . '</a></p>' .
 
 			'</div>';
 	}
 }
 
-Gutenberg_Blocks_In_25_Minutes::instance();
+Caxton_Boilerplate::instance();
