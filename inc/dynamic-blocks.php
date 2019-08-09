@@ -40,7 +40,7 @@ class Caxton_Boilerplate_Dynamic_Blocks {
 	public function rest_handler_demo() {
 		$args = $_GET;
 		unset( $args['_locale'] );
-		return $this->demo( $_GET );
+		return $this->demo( $args );
 	}
 
 	public function demo( $args ) {
